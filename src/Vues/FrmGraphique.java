@@ -79,6 +79,7 @@ public class FrmGraphique extends JFrame{
                 data.setValue(nb, sexe, tranche);
             }
         }
+        //Les données ne sont pas bonnes il faut inverser les clés dans la hashmap
         //On créer le graphique
         JFreeChart chart2 = ChartFactory.createStackedBarChart(
                 "Pyramide des ages",
