@@ -42,6 +42,52 @@ public class FrmGraphique extends JFrame{
         ConnexionBDD cnx = new ConnexionBDD();
         ctrlGraphique = new CtrlGraphique();
 
+        //Graphique 1
+        DefaultCategoryDataset data = new DefaultCategoryDataset();
+        String age;
+        double salaire;
+        //On remplit le dataset
+        for(int key: ctrlGraphique.getDataGraph1().keySet()){
+            age = String.valueOf(key);
+            salaire = ctrlGraphique.getDataGraph1().get(key);
+            data.addValue(salaire, "", age);
+        }
+        //On créer le graphique
+        JFreeChart chart1 = ChartFactory.createLineChart(
+                "Moyenne des salaires par âge",
+                "Age",
+                "Salaire",
+                data,
+                PlotOrientation.VERTICAL, false, true, false);
+        ChartPanel graph1 = new ChartPanel(chart1);
+        pnlGraph1.add(graph1);
+        pnlGraph1.validate();
 
+
+        //Graphique 4
+        data = new DefaultCategoryDataset();
+        String nomSemestre;
+        String nomMagasin;
+        double montant;
+        //On remplit le dataset
+        for(String key: ctrlGraphique.getDataGraph4().keySet()){
+            nomSemestre = key;
+            for(String key2: ctrlGraphique.getDataGraph4().get(key).keySet()){
+                nomMagasin = key2;
+                montant = ctrlGraphique.getDataGraph4().get(key).get(key2);
+                data.setValue(montant, nomMagasin, nomSemestre);
+            }
+        }
+        //On créer le graphique
+        JFreeChart chart4 = ChartFactory.createBarChart(
+                "Montant des ventes par magasin",
+                "Magasin",
+                "Montant des ventes",
+                data,
+                PlotOrientation.VERTICAL, true, true, false
+        );
+        ChartPanel graph4 = new ChartPanel(chart4);
+        pnlGraph4.add(graph4);
+        pnlGraph4.validate();
     }
 }
